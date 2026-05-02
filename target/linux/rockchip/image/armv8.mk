@@ -33,6 +33,16 @@ define Device/friendlyarm_nanopc-t4
 endef
 TARGET_DEVICES += friendlyarm_nanopc-t4
 
+define Device/norco_emb-3531
+  $(Device/rk3399)
+  DEVICE_VENDOR := NORCO
+  DEVICE_MODEL := EMB-3531
+  DEVICE_PACKAGES := kmod-usb-dwc3 \
+  kmod-sound-soc-simple-card kmod-sound-soc-simple-amplifier kmod-sound-soc-rockchip kmod-sound-soc-hdmi-codec kmod-sound-soc-es8316 \
+  kmod-drm-rockchip kmod-drm-panfrost kmod-extcon-usbc-virtual-pd rockchip-cdn-dp-firmware kmod-r8169
+endef
+TARGET_DEVICES += norco_emb-3531
+
 define Device/friendlyarm_nanopc-t6
   DEVICE_VENDOR := FriendlyARM
   DEVICE_MODEL := NanoPC T6
