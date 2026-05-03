@@ -39,9 +39,7 @@ define Device/rk3399_emb-3531
   SOC := rk3399
   DEVICE_DTS_DIR := ../dts
   DEVICE_DTS := rockchip/rk3399-emb-3531
-  DEVICE_PACKAGES := kmod-r8169 kmod-usb-dwc3 kmod-sound-soc-simple-card kmod-sound-soc-simple-amplifier \
-  kmod-sound-soc-rockchip kmod-sound-soc-hdmi-codec kmod-sound-soc-es8316 kmod-drm-rockchip \
-  kmod-drm-panfrost kmod-extcon-usbc-virtual-pd rockchip-cdn-dp-firmware
+  DEVICE_PACKAGES := kmod-r8169
   UBOOT_DEVICE_NAME := emb-3531-rk3399
 endef
 TARGET_DEVICES += rk3399_emb-3531
