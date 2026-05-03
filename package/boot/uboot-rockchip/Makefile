@@ -132,7 +132,7 @@ define U-Boot/emb-3531-rk3399
   $(U-Boot/rk3399/Default)
   NAME:=EMB-3531
   BUILD_DEVICES:= \
-    norco_emb-3531
+    rk3399_emb-3531
 endef
 
 define U-Boot/nanopi-r4s-rk3399
