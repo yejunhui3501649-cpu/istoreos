@@ -34,15 +34,14 @@ endef
 TARGET_DEVICES += friendlyarm_nanopc-t4
 
 define Device/rk3399_emb-3531
-  DEVICE_VENDOR := NORCO
+  DEVICE_VENDOR := Norco
   DEVICE_MODEL := EMB-3531
   SOC := rk3399
-  DEVICE_DTS_DIR := ../dts
-  DEVICE_DTS := rockchip/rk3399-emb-3531
-  DEVICE_PACKAGES := kmod-r8169
   UBOOT_DEVICE_NAME := emb-3531-rk3399
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-img | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-r8169
 endef
-TARGET_DEVICES += rk3399_emb-3531
+TARGET_DEVICES = rk3399_emb-3531
 
 define Device/friendlyarm_nanopc-t6
   DEVICE_VENDOR := FriendlyARM
