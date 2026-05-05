@@ -130,6 +130,7 @@ endef
 
 define U-Boot/emb-3531-rk3399
   $(U-Boot/rk3399/Default)
+  UBOOT_CONFIG:=emb-3531-rk3399
   NAME:=EMB-3531
   BUILD_DEVICES:= \
     rk3399_emb-3531
