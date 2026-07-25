@@ -1092,20 +1092,26 @@ define Device/honor_fur-602
   DEVICE_MODEL := FUR-602
   DEVICE_DTS := mt7981b-honor-fur-602
   DEVICE_DTS_DIR := ../dts
+  DEVICE_DTC_FLAGS := --pad 4096
+  DEVICE_DTS_LOADADDR := 0x43f00000
   SUPPORTED_DEVICES += mediatek,mt7981-spim-snand-rfb
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
-  UBINIZE_OPTS := -E 5
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware \
+	e2fsprogs f2fsck mkf2fs
+  KERNEL_LOADADDR := 0x44000000
+  KERNEL := kernel-bin | gzip
+  KERNEL_INITRAMFS := kernel-bin | lzma | \
+	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
+  KERNEL_INITRAMFS_SUFFIX := -recovery.itb
+  KERNEL_IN_UBI := 1
+  UBOOTENV_IN_UBI := 1
   BLOCKSIZE := 128k
   PAGESIZE := 2048
+  UBINIZE_OPTS := -E 5
+  IMAGES := sysupgrade.itb
   IMAGE_SIZE := 235520k
-  KERNEL_IN_UBI := 1
-  IMAGES += factory.bin
-  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-  KERNEL = kernel-bin | lzma | \
-	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
-  KERNEL_INITRAMFS = kernel-bin | lzma | \
-	fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd
+  IMAGE/sysupgrade.itb := append-kernel | \
+	 fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-static-with-rootfs | \
+	 pad-rootfs | append-metadata
 endef
 TARGET_DEVICES += honor_fur-602
 

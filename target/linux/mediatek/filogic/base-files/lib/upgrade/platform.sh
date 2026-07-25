@@ -76,6 +76,7 @@ platform_do_upgrade() {
 	cudy,tr3000-v1-ubootmod|\
 	gatonetworks,gdsp|\
 	h3c,magic-nx30-pro|\
+	honor,fur-602|\
 	jcg,q30-pro|\
 	jdcloud,re-cp-03|\
 	konka,komi-a31|\
@@ -174,7 +175,6 @@ platform_do_upgrade() {
 			;;
 		esac
 		;;
-	honor,fur-602|\
 	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-wr30u-stock|\
 	xiaomi,redmi-router-ax6000-stock)
@@ -201,7 +201,8 @@ platform_check_image() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
-	cmcc,rax3000m)
+	cmcc,rax3000m|\
+	honor,fur-602)
 		[ "$magic" != "d00dfeed" ] && {
 			echo "Invalid image type."
 			return 1
@@ -223,7 +224,8 @@ platform_copy_config() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
-	cmcc,rax3000m)
+	cmcc,rax3000m|\
+	honor,fur-602)
 		if [ "$CI_METHOD" = "emmc" ]; then
 			emmc_copy_config
 		fi

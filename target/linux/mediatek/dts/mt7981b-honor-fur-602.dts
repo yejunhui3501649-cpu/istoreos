@@ -23,6 +23,7 @@
 
 	chosen: chosen {
 		stdout-path = "serial0:115200n8";
+		rootdisk = <&ubi_rootdisk>;
 	};
 
 	memory@40000000 {
@@ -201,8 +202,15 @@
 			};
 
 			partition@580000 {
+				compatible = "linux,ubi";
 				label = "ubi";
 				reg = <0x580000 0xe680000>;
+
+				volumes {
+					ubi_rootdisk: ubi-volume-fit {
+						volname = "fit";
+					};
+				};
 			};
 		};
 	};
