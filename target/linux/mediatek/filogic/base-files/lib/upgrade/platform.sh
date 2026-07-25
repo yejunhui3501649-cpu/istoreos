@@ -174,6 +174,7 @@ platform_do_upgrade() {
 			;;
 		esac
 		;;
+	honor,fur-602|\
 	xiaomi,mi-router-ax3000t|\
 	xiaomi,mi-router-wr30u-stock|\
 	xiaomi,redmi-router-ax6000-stock)
