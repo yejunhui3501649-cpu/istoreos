@@ -26,6 +26,13 @@ validate_overlay_partition()
 	[ ! -e "$OVERLAY_DEV" ] && \
 		log "overlay: $OVERLAY_DEV not found" && return 1
 
+	# If OVERLAY_FS is explicitly set (e.g., UBI devices), use it
+	[ -n "$OVERLAY_FS" ] && {
+		FSTYPE="$OVERLAY_FS"
+		log "overlay: using explicit filesystem $FSTYPE"
+		return 0
+	}
+
 	[ -n "$FSTYPE" ] && return 0
 
 	# get filesystem
@@ -61,6 +68,10 @@ format_overlay_partition()
 			RET=$?
 			[ $RET -ne 0 ] || tune2fs -o '^user_xattr,^acl' -r 1024 "$OVERLAY_DEV"
 			;;
+		ubifs)
+			log "overlay: ubifs does not require formatting"
+			RET=0
+			;;
 		*)
 			log "overlay: unhandled fs type : $OVERLAY_FS"
 			RET=1
@@ -85,6 +96,9 @@ check_overlay_partition()
 			sync
 			resize2fs "$OVERLAY_DEV"
 			sync
+			;;
+		ubifs)
+			log "overlay: ubifs does not require checking"
 			;;
 	esac
 }

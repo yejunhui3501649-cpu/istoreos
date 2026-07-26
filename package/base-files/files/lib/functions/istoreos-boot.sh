@@ -110,6 +110,15 @@ get_overlay_partition()
 		log "No overlay partition in Docker"
 		return 1
 	}
+
+	# Check for UBI devices - rootfs_data volume
+	if [ -b /dev/ubi0_2 ]; then
+		log "Found UBI rootfs_data volume at /dev/ubi0_2"
+		OVERLAY_DEV="/dev/ubi0_2"
+		OVERLAY_FS="ubifs"
+		return 0
+	fi
+
 	_get_overlay_partition_default || _get_overlay_partition_fallback || {
 		log "Unable to determine overlay partition"
 		return 1
