@@ -1107,8 +1107,11 @@ define Device/honor_fur-602
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   UBINIZE_OPTS := -E 5
-  IMAGES := sysupgrade.itb
+  IMAGES := factory.bin sysupgrade.itb
   IMAGE_SIZE := 235520k
+  IMAGE/factory.bin := append-kernel | \
+	 fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-static-with-rootfs | \
+	 pad-rootfs | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.itb := append-kernel | \
 	 fit gzip $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb external-static-with-rootfs | \
 	 pad-rootfs | append-metadata
